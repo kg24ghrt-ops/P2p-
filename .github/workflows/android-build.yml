@@ -19,14 +19,16 @@ jobs:
           sudo apt install -y \
             git zip unzip openjdk-17-jdk \
             python3-pip python3-setuptools python3-wheel \
-            zlib1g-dev libncurses5 libstdc++6
+            zlib1g-dev libncurses5 libstdc++6 \
+            build-essential autoconf automake libtool pkg-config \
+            libffi-dev libssl-dev default-jdk
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: 3.11
 
-      - name: Install Buildozer
+      - name: Install Buildozer & Kivy
         run: |
           pip install --upgrade pip
           pip install cython buildozer kivy
