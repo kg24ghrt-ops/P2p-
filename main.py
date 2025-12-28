@@ -1,3 +1,3 @@
-print("Execution starting on GitHub...")
+print("Execution starting on Galaxy Isolated Branch...")
 import os
-print(f"Running on runner: {os.uname().nodename}")
+print(f"Runner Node: {os.uname().nodename}")
