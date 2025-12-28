@@ -4,6 +4,24 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Run
+      - uses: actions/checkout@v4
+        with:
+          ref: galaxy-ide
+      - name: Environment Fingerprint
+        run: |
+          echo "### RESOURCE PROFILE ###"
+          echo "CPU: $(lscpu | grep 'Model name' | cut -f 2 -d ":")"
+          echo "Memory: $(free -h | grep 'Mem' | awk '{print $2}')"
+          echo "Storage: $(df -h / | tail -1 | awk '{print $4}') available"
+          echo "########################"
+      - name: Execute Logic
         run: python main.py
+      - name: Package Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: galaxy-run-artifacts
+          path: |
+            .
+            !.git
+            !.github
